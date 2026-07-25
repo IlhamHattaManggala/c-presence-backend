@@ -8,9 +8,10 @@ dotenv.config();
 const app = express();
 
 // Configure CORS
-const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+const rawFrontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+const frontendUrl = rawFrontendUrl.replace(/\/$/, '');
 app.use(cors({
-  origin: [frontendUrl, 'http://localhost:3000', 'http://localhost:3002'],
+  origin: [frontendUrl, `${frontendUrl}/`, 'http://localhost:3000', 'http://localhost:3002'],
   credentials: true
 }));
 
